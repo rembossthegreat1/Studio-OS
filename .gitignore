@@ -1,71 +1,19 @@
-# Prerequisites
 #include <iostream>
-#include <vector>
 #include <string>
+#include <thread>
+#include <chrono>
 
-// Function to check if a file matches a given prerequisite extension
-bool isPrerequisite(const std::string& fileName, const std::vector<std::string>& extensions) {
-    for (const auto& ext : extensions) {
-        if (fileName.size() >= ext.size() &&
-            fileName.compare(fileName.size() - ext.size(), ext.size(), ext) == 0) {
-            return true;
-        }
-    }
-    return false;
+void displayIntro() {
+    std::cout << "**********************************" << std::endl;
+    std::cout << "*                                *" << std::endl;
+    std::cout << "*        Welcome to Studio OS    *" << std::endl;
+    std::cout << "*                                *" << std::endl;
+    std::cout << "**********************************" << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "Loading, please wait..." << std::endl;
 }
 
 int main() {
-    // List of prerequisite file extensions
-    std::vector<std::string> prerequisiteExtensions = {
-        ".d", ".mk", ".cmake", ".env", ".yaml", ".json",
-        ".xml", ".log", ".trace", ".ideproj", ".workspace",
-        ".vscode", ".tmp", ".lock"
-    };
-
-    // Example file names
-    std::vector<std::string> fileNames = {
-        "example.d", "build.mk", "config.env", "notes.log", "debug.trace", "temp.tmp", "main.cpp"
-    };
-
-    std::cout << "Checking for prerequisite files...\n";
-
-    for (const auto& file : fileNames) {
-        if (isPrerequisite(file, prerequisiteExtensions)) {
-            std::cout << file << " matches a prerequisite extension.\n";
-        } else {
-            std::cout << file << " does NOT match any prerequisite extension.\n";
-        }
-    }
-
+    displayIntro();
     return 0;
 }
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
