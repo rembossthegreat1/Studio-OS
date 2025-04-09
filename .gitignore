@@ -1,5 +1,44 @@
 # Prerequisites
-*.d
+#include <iostream>
+#include <vector>
+#include <string>
+
+// Function to check if a file matches a given prerequisite extension
+bool isPrerequisite(const std::string& fileName, const std::vector<std::string>& extensions) {
+    for (const auto& ext : extensions) {
+        if (fileName.size() >= ext.size() &&
+            fileName.compare(fileName.size() - ext.size(), ext.size(), ext) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    // List of prerequisite file extensions
+    std::vector<std::string> prerequisiteExtensions = {
+        ".d", ".mk", ".cmake", ".env", ".yaml", ".json",
+        ".xml", ".log", ".trace", ".ideproj", ".workspace",
+        ".vscode", ".tmp", ".lock"
+    };
+
+    // Example file names
+    std::vector<std::string> fileNames = {
+        "example.d", "build.mk", "config.env", "notes.log", "debug.trace", "temp.tmp", "main.cpp"
+    };
+
+    std::cout << "Checking for prerequisite files...\n";
+
+    for (const auto& file : fileNames) {
+        if (isPrerequisite(file, prerequisiteExtensions)) {
+            std::cout << file << " matches a prerequisite extension.\n";
+        } else {
+            std::cout << file << " does NOT match any prerequisite extension.\n";
+        }
+    }
+
+    return 0;
+}
 
 # Compiled Object files
 *.slo
