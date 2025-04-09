@@ -17,3 +17,51 @@ int main() {
     displayIntro();
     return 0;
 }
+
+#include <iostream>
+#include <string>
+#include <map>
+
+class User {
+public:
+    std::string email;
+    std::string password;
+
+    User(std::string email, std::string password) : email(email), password(password) {}
+};
+
+class LoginSystem {
+private:
+    std::map<std::string, User> users;
+
+public:
+    void registerUser(const std::string& email, const std::string& password) {
+        users[email] = User(email, password);
+    }
+
+    bool login(const std::string& email, const std::string& password) {
+        if (users.find(email) != users.end() && users[email].password == password) {
+            return true;
+        }
+        return false;
+    }
+};
+
+int main() {
+    LoginSystem loginSystem;
+    loginSystem.registerUser("user@example.com", "password123");
+
+    std::string email, password;
+    std::cout << "Enter email: ";
+    std::cin >> email;
+    std::cout << "Enter password: ";
+    std::cin >> password;
+
+    if (loginSystem.login(email, password)) {
+        std::cout << "Login successful!" << std::endl;
+    } else {
+        std::cout << "Login failed. Please check your email and password." << std::endl;
+    }
+
+    return 0;
+}
